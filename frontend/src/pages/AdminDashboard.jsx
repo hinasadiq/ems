@@ -2,8 +2,10 @@ import React from 'react'
 import AdminSidebar from '../components/dashboard/AdminSidebar'
 import Navbar from '../components/Navbar'
 import AdminSummary from '../components/dashboard/AdminSummary'
+import { useAuth } from '../context/authContext'
 
 const AdminDashboard = () => {
+  const {user} = useAuth()
   return (
     <div className='flex'>
       <AdminSidebar />

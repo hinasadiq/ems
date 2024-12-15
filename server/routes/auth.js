@@ -1,3 +1,4 @@
+
 import express from 'express';
 import authController from '../controllers/authController.js';  // Ensure .js extension is included
 

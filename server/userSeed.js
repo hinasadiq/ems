@@ -16,7 +16,8 @@ const userRegister = async () => {
             password :hashPassword,
             role:"admin"
         })
-        await newUser.save()
+        await newUser.save();
+        console.log("Admin user created successfully");
     }catch(error){
         console.log(error)
     }
