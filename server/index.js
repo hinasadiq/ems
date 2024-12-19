@@ -1,6 +1,7 @@
  import express from 'express';
 import cors from 'cors';
 import authRouter from './routes/auth.js';
+import departmentRouter from './routes/department.js'
 import connectToDatabase from './db/db.js';
 import dotenv from 'dotenv';
 
@@ -13,6 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api/auth', authRouter);
+app.use('/api/department', departmentRouter);
 
 const PORT = process.env.PORT || 5000;
 

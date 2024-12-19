@@ -1,6 +1,9 @@
 /* This JavaScript code snippet is defining a Mongoose schema for a user in a MongoDB database. Here's
 a breakdown of what each part is doing: */
 import mongoose from "mongoose";
+//import User from './models/User.js'; // Adjust based on your file structure
+
+
 
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
