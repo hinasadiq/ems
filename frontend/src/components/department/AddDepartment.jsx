@@ -102,11 +102,15 @@ const AddDepartment = () => {
           },
         }
       );
+      console.log('Request headers:', {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      });
+      console.log('Request body:', department);
 
       // Check success response
       if (response.data.success) {
         alert('Department added successfully!');
-        navigate('/admin-dashboard/departments');
+        navigate('/admin-dashboard/department');
       } else {
         alert(response.data.error || 'Failed to add department');
       }

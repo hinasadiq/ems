@@ -92,6 +92,7 @@ import Jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const verifyUser = async (req, res, next) => {
+    console.log('middleware triggered for token verification')
     try {
         const authHeader = req.headers.authorization;
 
@@ -100,8 +101,9 @@ const verifyUser = async (req, res, next) => {
         }
 
         const token = authHeader.split(' ')[1];
-        const decoded = await Jwt.verify(token, process.env.JWT_KEY);
-
+        console.log('Token recived:',token);
+        const decoded = Jwt.verify(token, process.env.JWT_KEY);
+        console.log('Token decoded successfully:',decoded);
         const user = await User.findById(decoded._id).select('-password');
         if (!user) {
             return res.status(404).json({ success: false, error: "User not found" });

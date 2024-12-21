@@ -7,11 +7,12 @@
 
 import express from 'express';
 import authMiddleware from '../middleware/authMiddleware.js';  // Corrected import path
-import { addDepartment } from '../controllers/departmentController.js';
+import { addDepartment ,getDepartments} from '../controllers/departmentController.js';
 import verifyUser from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/add', verifyUser, addDepartment);
+router.get('/',authMiddleware, getDepartments);      
+router.post('/add', verifyUser, addDepartment);      
 
 export default router;
