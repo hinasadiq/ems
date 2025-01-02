@@ -110,24 +110,53 @@ export const columns = [
 export const DepartmentButton = ({ _id, onDepartmentDelete }) => { // Ensure onDepartmentDelete is passed as a prop
     const navigate = useNavigate();
 
-    const handleDelete = async (id) => {
-        try {
-            const response = await axios.delete(`http://localhost:5000/api/department/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
+    // const handleDelete = async (id) => {
+    //     const confirm = window.confirm("Do you want to delete");
+    //     if (confirm){
+    //     try {
+    //         const response = await axios.delete(`http://localhost:5000/api/department/${_id}`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${localStorage.getItem('token')}`,
+    //             },
+    //         });
 
-            if (response.data.success) {
-                onDepartmentDelete(id);
-            }
-        } catch (error) {
-            if (error.response) {
-                alert(error.response.data.error);
+    //         if (response.data.success) {
+    //             onDepartmentDelete(_id);
+    //            // navigate("/admin-dashboard/department");
+    //         }
+    //     } catch (error) {
+    //         if (error.response) {
+    //             alert(error.response.data.error);
+    //         }
+    //     }
+    // }
+    // };
+    const handleDelete = async (id) => {
+        console.log("Delete button clicked");
+        const confirm = window.confirm("Do you want to delete");
+        if (confirm) {
+            try {
+                console.log("Sending delete request for id:", id);
+                const response = await axios.delete(`http://localhost:5000/api/department/${_id}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+                console.log("Response received:", response);
+    
+                if (response.data.success) {
+                    onDepartmentDelete(_id);
+                    console.log("Department deleted successfully");
+                }
+            } catch (error) {
+                console.error("Error occurred:", error);
+                if (error.response) {
+                    alert(error.response.data.error);
+                }
             }
         }
     };
-
+    
     return (
         <div className="flex space-x-3">
             <button
@@ -136,7 +165,7 @@ export const DepartmentButton = ({ _id, onDepartmentDelete }) => { // Ensure onD
             >
                 Edit
             </button>
-            <button className="px-3 py-1 bg-red-600 text-white" onClick={() => handleDelete(id)}> 
+            <button className="px-3 py-1 bg-red-600 text-white" onClick={(_id) => handleDelete(_id)}> 
                 Delete
             </button>
         </div>
